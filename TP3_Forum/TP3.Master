@@ -9,7 +9,12 @@
     <title>Weak End 1</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+    </style>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="assets/css/main.css"/>
@@ -18,40 +23,40 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Weak End</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right" role="form" runat="server">
-                    <div class="form-group">
-                        <asp:TextBox class="form-control" ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:TextBox type="password" class="form-control" ID="txtPassword" runat="server" placeholder="Password"></asp:TextBox>
-                    </div>
-                    <button type="submit" class="btn btn-success" runat="server" onclick="btnSubmit_Click">Sign in</button>
-                    <button type="submit" class="btn btn-primary" runat="server" onclick="btnRegister_Click">Register</button>
-                </form>
-            </div>
-            <!--/.navbar-collapse -->
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Weak End</a>
         </div>
-    </div>
-    <div>
-        <form id="form1" runat="server">
-            <div>
-                <asp:ContentPlaceHolder ID="PageContent" runat="server">
-                
-                </asp:ContentPlaceHolder>
+        <div class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
             </div>
-        </form>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+			<button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+    <div class="container">
+        <div>
+            <asp:ContentPlaceHolder ID="PageContent" runat="server">
+            
+            </asp:ContentPlaceHolder>
+        </div>
     </div>
 </body>
 </html>
