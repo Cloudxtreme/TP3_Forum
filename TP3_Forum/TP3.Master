@@ -45,8 +45,13 @@
         </div>
     </div>
     <div>
-        <asp:ContentPlaceHolder ID="PageContent" runat="server">
-        </asp:ContentPlaceHolder>
+        <form id="form1" runat="server">
+            <div>
+                <asp:ContentPlaceHolder ID="PageContent" runat="server">
+                
+                </asp:ContentPlaceHolder>
+            </div>
+        </form>
     </div>
 </body>
 </html>
