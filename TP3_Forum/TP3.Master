@@ -37,9 +37,8 @@
                     <div class="form-group">
                         <asp:TextBox type="password" class="form-control" ID="txtPassword" runat="server" placeholder="Password"></asp:TextBox>
                     </div>
-                    <asp:Button type="submit" class="btn btn-success" ID="btnSubmit" runat="server" Text="Sign in" OnClick="btnSubmit_Click"/>
-                    <button type="submit" class="btn btn-success">Sign in</button>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-success" runat="server" onclick="btnSubmit_Click">Sign in</button>
+                    <button type="submit" class="btn btn-primary" runat="server" onclick="btnRegister_Click">Register</button>
                 </form>
             </div>
             <!--/.navbar-collapse -->
