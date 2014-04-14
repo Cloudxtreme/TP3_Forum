@@ -13,5 +13,9 @@ namespace TP3_Forum
         {
 
         }
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

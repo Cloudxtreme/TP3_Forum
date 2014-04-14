@@ -14,6 +14,7 @@ namespace TP3_Forum
         {
 
         }
+
         private OleDbConnection getDatabaseConnection()
         {
             OleDbConnection oleDbConnection = new OleDbConnection();
