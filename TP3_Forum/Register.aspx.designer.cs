@@ -10,16 +10,16 @@
 namespace TP3_Forum {
     
     
-    public partial class TP3 {
+    public partial class Default {
         
         /// <summary>
-        /// Contrôle head.
+        /// Contrôle txtUsername.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.TextBox txtUsername;
         
         /// <summary>
         /// Contrôle txtEmail.
@@ -38,23 +38,5 @@ namespace TP3_Forum {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        
-        /// <summary>
-        /// Contrôle form1.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// Contrôle PageContent.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder PageContent;
     }
 }
