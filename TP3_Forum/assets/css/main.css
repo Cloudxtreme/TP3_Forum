@@ -42,3 +42,7 @@ a {
     color: #333;
     text-decoration: underline;
 }
+
+.register {
+    margin: 10px 0;
+}
