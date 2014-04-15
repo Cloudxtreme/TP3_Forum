@@ -97,6 +97,7 @@
   <ItemGroup>
     <Folder Include="assets\css\" />
     <Folder Include="assets\database\" />
+    <Folder Include="assets\img\" />
     <Folder Include="assets\js\" />
   </ItemGroup>
   <PropertyGroup>

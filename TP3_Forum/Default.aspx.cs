@@ -20,7 +20,8 @@ namespace TP3_Forum
             }
             else
             {
-                test.Text = loadIndex();
+                test.Text = "<div class=\"jumbotron\"><div class=\"container\"><h1>Bienvenue Pirates!</h1><p>C'est le temps de se parler!</p></div></div>";
+                test.Text += loadIndex();
             }
         }
 
@@ -33,54 +34,16 @@ namespace TP3_Forum
 
                 string indexHtml = "";
 
-                string query = "SELECT Titre, Auteur, DateCreation FROM Sujets;";
+                string query = "SELECT Titre, Auteur, DateCreation, ID FROM Sujets;";
                 OleDbCommand oleDbCommand = new OleDbCommand(query, oleDbConnection);
                 OleDbDataReader monDataReader = oleDbCommand.ExecuteReader();
 
                 while (monDataReader.Read())
                 {
                     indexHtml += "<div class=\"row show-grid\">";
-                    indexHtml += "<div class=\"col-md-4 col-left\"><h4>" + monDataReader[0] + "</h4></div>";
+                    indexHtml += "<div class=\"col-md-4 col-left\"><h4><a href=\"?thread=" + monDataReader[3] +"\">" + monDataReader[0] + "</a></h4></div>";
                     indexHtml += "<div class=\"col-md-4 col-middle\"><h4>" + monDataReader[1] + "</h4></div>";
                     indexHtml += "<div class=\"col-md-4 col-right\"><h4>" + monDataReader[2] + "</h4></div>";
-                    indexHtml += "</div>";
-                }
-
-                return indexHtml;
-            }
-            catch (Exception ex)
-            {
-                return "Commande ratée: " + ex.Message;
-            }
-            finally
-            {
-                if (oleDbConnection != null)
-                {
-                    oleDbConnection.Close();
-                }
-            }
-        }
-
-        private string getThreadTitle(int index)
-        {
-            OleDbConnection oleDbConnection = null;
-            try
-            {
-                oleDbConnection = getDatabaseConnection();
-
-                string indexHtml = "";
-
-                string query = "SELECT Author FROM Messages WHERE Sujet = " + index + ";";
-                OleDbCommand oleDbCommand = new OleDbCommand(query, oleDbConnection);
-                OleDbDataReader monDataReader = oleDbCommand.ExecuteReader();
-
-                while (monDataReader.Read())
-                {
-                    indexHtml += "<div class=\"row\">";
-                    indexHtml += "<div class=\"col-md-2 threadCenter\">" + monDataReader[0] + "</div>";
-                    indexHtml += "<div class=\"col-md-10 threadCenter\">" + monDataReader[1] + "</div>";
-                    indexHtml += "<div class=\"col-md-2 hidden-xs hidden-sm avatar\"><img src=\"assets/img/" + monDataReader[2] + "\"/></div>";
-                    indexHtml += "<div class=\"col-md-10\">" + monDataReader[3] + "</div>";
                     indexHtml += "</div>";
                 }
 
