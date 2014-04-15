@@ -14,7 +14,7 @@ namespace TP3_Forum
         {
             if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
             {
-                rightBar.InnerHtml = (string)Session["loginName"];
+                rightBar.InnerHtml = (string)Session["loginName"] + " disconnect";
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -28,14 +28,14 @@ namespace TP3_Forum
             {
                 oleDbConnection = getDatabaseConnection();
 
-                string query = "SELECT MotDePasse FROM Utilisateurs WHERE Courriel = \"" + txtEmail.Text + "\";";
+                string query = "SELECT MotDePasse, Pseudo FROM Utilisateurs WHERE Courriel = \"" + txtEmail.Text + "\";";
                 OleDbCommand oleDbCommand = new OleDbCommand(query, oleDbConnection);
                 OleDbDataReader monDataReader = oleDbCommand.ExecuteReader();
                 monDataReader.Read();
                 string result = monDataReader[0] + "";
                 if (result.Equals(txtPassword.Text))
                 {
-                    Session["loginName"] = "Apos";
+                    Session["loginName"] = monDataReader[1] + "";
                     Response.Redirect("Default.aspx");
                 }
             }

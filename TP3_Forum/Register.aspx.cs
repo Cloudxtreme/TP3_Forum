@@ -15,18 +15,12 @@ namespace TP3_Forum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtEmail.Text = (string)Session["email"];
-            txtPassword.Text = (string)Session["password"];
         }
         protected void btnFinishRegister_Click(object sender, EventArgs e)
         {
-            Session["username"] = txtUsername.Text;
-            Session["email"] = txtEmail.Text;
-            Session["password"] = txtPassword.Text;
-
             string username = txtUsername.Text;
-            string email = txtEmail.Text;
-            string password = txtPassword.Text;
+            string email = txtRegEmail.Text;
+            string password = txtRegPassword.Text;
 
             string filePath = avatar.PostedFile.FileName;
             string filename = Path.GetFileName(filePath);
@@ -49,13 +43,8 @@ namespace TP3_Forum
             if (contenttype != String.Empty)
             {
                 OleDbConnection connection = getDatabaseConnection();
-                string query = "INSERT INTO Utilisateurs (Pseudo, Courriel, MotDePasse, Avatar) VALUES (@username, @email, @password, @data);";
+                string query = "INSERT INTO Utilisateurs (Pseudo, Courriel, MotDePasse, Avatar) VALUES (\"" + username + "\", \"" + email + "\", \"" + password + "\", \"" + filename + "\");";
                 OleDbCommand cmd = new OleDbCommand(query, connection);
-                cmd.Parameters.Add(new OleDbParameter("username", username){OleDbType = OleDbType.LongVarChar});
-                cmd.Parameters.Add(new OleDbParameter("email", email){OleDbType = OleDbType.LongVarChar});
-                cmd.Parameters.Add(new OleDbParameter("password", password) {OleDbType = OleDbType.LongVarChar});
-                //cmd.Parameters.Add("@Data", SqlDbType.Binary).Value = bytes;
-                cmd.Prepare();
                 cmd.ExecuteNonQuery();
                 //TODO: Validate user input and add it the the database. Then confirm it has been added.
 
