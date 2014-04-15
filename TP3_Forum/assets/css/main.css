@@ -7,3 +7,33 @@
 .row {
   padding-bottom: 5px;
 }
+
+.col-left {
+    background-color:gray;
+    height:50px;
+}
+
+.col-middle {
+    background-color:green;
+    height:50px;
+}
+
+.col-right {
+    background-color:gray;
+    height:50px;
+}
+
+.col-left h4, .col-middle h4, .col-right h4 {
+	margin: 0;
+	padding: 10px;
+}
+
+.row .threadCenter {
+    text-align:center;
+    font-weight:bold;
+}
+
+.row .avatar {
+    height:180px;
+    background-color:green;
+}
