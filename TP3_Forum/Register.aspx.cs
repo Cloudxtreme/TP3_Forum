@@ -1,10 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace TP3_Forum
 {
@@ -21,12 +24,49 @@ namespace TP3_Forum
             Session["email"] = txtEmail.Text;
             Session["password"] = txtPassword.Text;
 
-            string query = "INSERT INTO Reservation (DateReservation, IDUsager, IDLivre) VALUES (2014-04-11, 3, 3);";
-            
-            executeNonQuery(query, lblResult);
-            //TODO: Validate user input and add it the the database. Then confirm it has been added.
+            string username = txtUsername.Text;
+            string email = txtEmail.Text;
+            string password = txtPassword.Text;
 
-            Response.Redirect("Default.aspx");
+            string filePath = avatar.PostedFile.FileName;
+            string filename = Path.GetFileName(filePath);
+            string ext = Path.GetExtension(filename);
+            string contenttype = String.Empty;
+            FileUpload fileUpload1 = avatar;
+            fileUpload1.SaveAs(Server.MapPath("~/assets/img/") + filename);
+            switch (ext)
+            {
+                case ".jpg":
+                    contenttype = "image/jpg";
+                    break;
+                case ".png":
+                    contenttype = "image/png";
+                    break;
+                case ".gif":
+                    contenttype = "image/gif";
+                    break;
+            }
+            if (contenttype != String.Empty)
+            {
+                OleDbConnection connection = getDatabaseConnection();
+                string query = "INSERT INTO Utilisateurs (Pseudo, Courriel, MotDePasse, Avatar) VALUES (@username, @email, @password, @data);";
+                OleDbCommand cmd = new OleDbCommand(query, connection);
+                cmd.Parameters.Add(new OleDbParameter("username", username){OleDbType = OleDbType.LongVarChar});
+                cmd.Parameters.Add(new OleDbParameter("email", email){OleDbType = OleDbType.LongVarChar});
+                cmd.Parameters.Add(new OleDbParameter("password", password) {OleDbType = OleDbType.LongVarChar});
+                //cmd.Parameters.Add("@Data", SqlDbType.Binary).Value = bytes;
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                //TODO: Validate user input and add it the the database. Then confirm it has been added.
+
+                Response.Redirect("Default.aspx");
+            }
+
+            else
+            {
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = "Format de fichier non reconnu. Veuillez utiliser une image de format JPG, PNG, ou GIF.";
+            }
         }
         private OleDbConnection getDatabaseConnection()
         {
