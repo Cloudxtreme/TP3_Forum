@@ -15,10 +15,17 @@ namespace TP3_Forum
             var uri = new Uri(Request.Url.ToString());
             string path = uri.GetLeftPart(UriPartial.Path);
 
-            string param = Request.QueryString["thread"];
-            if (param != null)
+            string paramDisconnect = Request.QueryString["disconnect"];
+            if (paramDisconnect != null)
             {
-                test.Text += loadThread(Convert.ToInt32(param));
+                Session["loginName"] = "";
+                Response.Redirect("Default.aspx");
+            }
+
+            string paramThread = Request.QueryString["thread"];
+            if (paramThread != null)
+            {
+                test.Text += loadThread(Convert.ToInt32(paramThread));
             }
             else
             {

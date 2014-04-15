@@ -14,7 +14,7 @@ namespace TP3_Forum
         {
             if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
             {
-                rightBar.InnerHtml = (string)Session["loginName"] + " disconnect";
+                rightBar.InnerHtml = "<a href=\"?disconnect=1\">" + (string)Session["loginName"] + " disconnect</a>";
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)

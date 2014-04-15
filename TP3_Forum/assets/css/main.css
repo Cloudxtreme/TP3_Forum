@@ -6,6 +6,7 @@
 
 .row {
   padding-bottom: 5px;
+  box-shadow: 0 0 15px 2px;
 }
 
 .col-left {
@@ -47,6 +48,6 @@ a {
     margin: 10px 0;
 }
 
-#rightBar {
+#rightBar a {
     color: white;
 }
