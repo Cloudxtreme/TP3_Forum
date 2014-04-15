@@ -39,7 +39,7 @@
               <a class="navbar-brand" href="/">Weak End</a>
             </div>
             <div class="navbar-collapse collapse">
-              <div class="navbar-form navbar-right" role="form">
+              <div id="rightBar" runat="server" class="navbar-form navbar-right" role="form">
                 <div class="form-group">
                   <asp:TextBox class="form-control" ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox><br />
                 </div>

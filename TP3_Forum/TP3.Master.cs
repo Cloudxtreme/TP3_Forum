@@ -12,7 +12,10 @@ namespace TP3_Forum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
+            {
+                rightBar.InnerHtml = (string)Session["loginName"];
+            }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -20,6 +23,32 @@ namespace TP3_Forum
             //      When logged in, remove the log in form and add a disconnect button.
             //      Show the user's name at the top.
             //      Users that are logged in can create threads and post messages to threads.
+            OleDbConnection oleDbConnection = null;
+            try
+            {
+                oleDbConnection = getDatabaseConnection();
+
+                string query = "SELECT MotDePasse FROM Utilisateurs WHERE Courriel = \"" + txtEmail.Text + "\";";
+                OleDbCommand oleDbCommand = new OleDbCommand(query, oleDbConnection);
+                OleDbDataReader monDataReader = oleDbCommand.ExecuteReader();
+                monDataReader.Read();
+                string result = monDataReader[0] + "";
+                if (result.Equals(txtPassword.Text))
+                {
+                    Session["loginName"] = "Apos";
+                    Response.Redirect("Default.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                if (oleDbConnection != null)
+                {
+                    oleDbConnection.Close();
+                }
+            }
         }
         protected void btnRegister_Click(object sender, EventArgs e)
         {
