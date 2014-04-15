@@ -2,8 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContent" runat="server">
-    <form id="form2" runat="server">
         <asp:Label ID="test" runat="server"></asp:Label>
         <div id="container" runat="server"></div>
-    </form>
 </asp:Content>

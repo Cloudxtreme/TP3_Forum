@@ -12,11 +12,13 @@ namespace TP3_Forum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string param = Request.QueryString["thread"];
+            var uri = new Uri(Request.Url.ToString());
+            string path = uri.GetLeftPart(UriPartial.Path);
 
+            string param = Request.QueryString["thread"];
             if (param != null)
             {
-                test.Text += loadThread(Convert.ToInt32(param)); 
+                test.Text += loadThread(Convert.ToInt32(param));
             }
             else
             {
