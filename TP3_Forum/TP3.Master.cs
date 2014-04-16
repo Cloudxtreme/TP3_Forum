@@ -16,6 +16,13 @@ namespace TP3_Forum
             {
                 rightBar.InnerHtml = "<a href=\"?disconnect=1\">" + (string)Session["loginName"] + " disconnect</a>";
             }
+
+            string paramDisconnect = Request.QueryString["disconnect"];
+            if (paramDisconnect != null)
+            {
+                Session["loginName"] = "";
+                Response.Redirect("Default.aspx");
+            }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {

@@ -25,7 +25,7 @@ namespace TP3_Forum
             {
                 oleDbConnection = getDatabaseConnection();
 
-                string query = "INSERT INTO Sujets ( Titre, Auteur, DateCreation) VALUES (\"" + txtTitle.Text + "\", \"" + (string)Session["loginName"] + "\", DATE());";
+                string query = "INSERT INTO Sujets ( Titre, Auteur, DateCreation) VALUES (\"" + txtTitle.Text + "\", \"" + (string)Session["loginName"] + "\", #" + DateTime.Now +"#);";
                 OleDbCommand oleDbCommand = new OleDbCommand(query, oleDbConnection);
                 oleDbCommand.ExecuteNonQuery();
 
@@ -35,7 +35,7 @@ namespace TP3_Forum
                 monDataReader.Read();
                 string index = monDataReader[0] + "";
 
-                query = "INSERT INTO Messages (Sujet, Texte, Auteur, DateCreation) VALUES (" + index + ", \"" + txtMessage.InnerText + "\", \"" + (string)Session["loginName"] + "\", DATE());";
+                query = "INSERT INTO Messages (Sujet, Texte, Auteur, DateCreation) VALUES (" + index + ", \"" + txtMessage.InnerText + "\", \"" + (string)Session["loginName"] + "\", #" + DateTime.Now + "#);";
                 oleDbCommand = new OleDbCommand(query, oleDbConnection);
                 oleDbCommand.ExecuteNonQuery();
 
