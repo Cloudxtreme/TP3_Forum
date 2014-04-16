@@ -5,7 +5,7 @@
     <asp:TextBox ID="txtUsername" placeholder="Username" class="form-control register" runat="server" required="true" />
     <asp:TextBox ID="txtRegEmail" placeholder="Email" class="form-control register" runat="server" required="true" />
     <asp:TextBox ID="txtRegPassword" type="password" placeholder="Password" class="form-control register" runat="server" required="true" />
-    <asp:Label ID="lblAvatar" runat="server" Text="Veuillez choisir un avatar : "></asp:Label><asp:FileUpload ID="avatar" runat="server" class="register" required="true"/>
+    <asp:Label ID="lblAvatar" runat="server" Text="Veuillez choisir un avatar : "></asp:Label><asp:FileUpload ID="avatar" runat="server" class="register"/>
     <asp:Button class="btn btn-primary register" ID="btnFinishRegister" runat="server" Text="Register" OnClick="btnFinishRegister_Click"/>
     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
 </asp:Content>

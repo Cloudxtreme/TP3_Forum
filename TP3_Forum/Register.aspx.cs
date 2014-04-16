@@ -8,53 +8,73 @@ using System.Web.UI.WebControls;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace TP3_Forum
 {
     public partial class Register : System.Web.UI.Page
     {
+        private int height;
+        private int width;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Page.IsPostBack)
+            {
+                height = Convert.ToInt32(ConfigurationManager.AppSettings.Get("RequiredHeight"));
+                width = Convert.ToInt32(ConfigurationManager.AppSettings.Get("RequiredWidth"));
+            }
         }
         protected void btnFinishRegister_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text;
             string email = txtRegEmail.Text;
             string password = txtRegPassword.Text;
-
             string filePath = avatar.PostedFile.FileName;
             string filename = Path.GetFileName(filePath);
-            string ext = Path.GetExtension(filename);
-            string contenttype = String.Empty;
-            FileUpload fileUpload1 = avatar;
-            fileUpload1.SaveAs(Server.MapPath("~/assets/img/") + filename);
-            switch (ext)
+            if (filename != "")
             {
-                case ".jpg":
-                    contenttype = "image/jpg";
-                    break;
-                case ".png":
-                    contenttype = "image/png";
-                    break;
-                case ".gif":
-                    contenttype = "image/gif";
-                    break;
+                string ext = Path.GetExtension(filename);
+                string contenttype = String.Empty;
+                FileUpload fileUpload1 = avatar;
+                fileUpload1.SaveAs(Server.MapPath("~/assets/img/") + filename);
+
+                switch (ext)
+                {
+                    case ".jpg":
+                        contenttype = "image/jpg";
+                        break;
+                    case ".png":
+                        contenttype = "image/png";
+                        break;
+                    case ".gif":
+                        contenttype = "image/gif";
+                        break;
+                }
+                if (contenttype != String.Empty && ValidateFileDimensions())
+                {
+                    OleDbConnection connection = getDatabaseConnection();
+                    string query = "INSERT INTO Utilisateurs (Pseudo, Courriel, MotDePasse, Avatar) VALUES (\"" + username + "\", \"" + email + "\", \"" + password + "\", \"" + filename + "\");";
+                    OleDbCommand cmd = new OleDbCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    Response.Write("<script>alert('Votre inscription a été soumise. Bienvenue!')</script>");
+                    Response.Redirect("Default.aspx");
+                }
             }
-            if (contenttype != String.Empty)
+            else if (filename == "")
             {
+                string avatarDefault = "Default.png";
                 OleDbConnection connection = getDatabaseConnection();
-                string query = "INSERT INTO Utilisateurs (Pseudo, Courriel, MotDePasse, Avatar) VALUES (\"" + username + "\", \"" + email + "\", \"" + password + "\", \"" + filename + "\");";
+                string query = "INSERT INTO Utilisateurs (Pseudo, Courriel, MotDePasse, Avatar) VALUES (\"" + username + "\", \"" + email + "\", \"" + password + "\", \"" + avatarDefault + "\");";
                 OleDbCommand cmd = new OleDbCommand(query, connection);
                 cmd.ExecuteNonQuery();
-                //TODO: Validate user input and add it the the database. Then confirm it has been added.
-
+                Response.Write("<script>alert('Votre inscription a été soumise. Bienvenue!')</script>");
                 Response.Redirect("Default.aspx");
             }
-
             else
             {
                 lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = "Format de fichier non reconnu. Veuillez utiliser une image de format JPG, PNG, ou GIF.";
+                lblMessage.Text = "Veuillez utiliser une image de format JPG, PNG, ou GIF de 180 pixels par 180 pixels.";
             }
         }
         private OleDbConnection getDatabaseConnection()
@@ -84,6 +104,13 @@ namespace TP3_Forum
                 {
                     oleDbConnection.Close();
                 }
+            }
+        }
+        public bool ValidateFileDimensions()
+        {
+            using (System.Drawing.Image imageAvatar = System.Drawing.Image.FromStream(avatar.PostedFile.InputStream))
+            {
+                return (imageAvatar.Height == height && imageAvatar.Width == width);
             }
         }
     }
