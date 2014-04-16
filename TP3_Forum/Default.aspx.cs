@@ -37,6 +37,11 @@ namespace TP3_Forum
                 test.Text = "<div class=\"jumbotron\"><div class=\"container\"><h1>Bienvenue Pirates!</h1><p>C'est le temps de se parler!</p></div></div>";
                 test.Text += loadIndex();
                 post.InnerHtml = "";
+                if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
+                {
+                    test.Text += "<h2><a href=\"NewThread.aspx\">Créer un nouveau sujet!</a></h2>";
+                }
+
             }
         }
 
