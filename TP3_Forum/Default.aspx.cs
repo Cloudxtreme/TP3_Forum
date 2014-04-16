@@ -34,7 +34,7 @@ namespace TP3_Forum
 
                 if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
                 {
-
+                    test.Text += "<h2><a href=\"NewThread.aspx\">Créer un nouveau sujet!</a></h2>";
                 }
             }
         }
