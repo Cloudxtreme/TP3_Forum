@@ -2,5 +2,12 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContent" runat="server">
     <h2>Création d'un nouveau sujet</h2>
+    <div class="row">
+        <asp:TextBox class="form-control" ID="txtTitle" runat="server" placeholder="Titre"></asp:TextBox><br />
+	    <textarea id="txtMessage" runat="server" class="form-control" rows="3"></textarea>
+	    <div class="col-md-1 col-md-offset-10">
+		    <button type="submit" class="btn btn-primary">Soumettre</button>
+		</div>
+	</div>
 </asp:Content>
 
