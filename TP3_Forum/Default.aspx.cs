@@ -15,6 +15,11 @@ namespace TP3_Forum
             var uri = new Uri(Request.Url.ToString());
             string path = uri.GetLeftPart(UriPartial.Path);
 
+            if (!(((string)Session["loginName"]) != null && !(((string)Session["loginName"]).Equals(""))))
+            {
+                txtMessage.Visible = false;
+            }
+
             string paramDisconnect = Request.QueryString["disconnect"];
             if (paramDisconnect != null)
             {
@@ -31,11 +36,7 @@ namespace TP3_Forum
             {
                 test.Text = "<div class=\"jumbotron\"><div class=\"container\"><h1>Bienvenue Pirates!</h1><p>C'est le temps de se parler!</p></div></div>";
                 test.Text += loadIndex();
-
-                if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
-                {
-
-                }
+                post.InnerHtml = "";
             }
         }
 
@@ -119,7 +120,21 @@ namespace TP3_Forum
                 }
             }
         }
+        protected void btnNouveauMessage_Click(object sender, EventArgs e)
+        {
 
+            string texte = txtMessage.InnerText;
+            string paramThread = Request.QueryString["thread"];
+            int indexSujet = Convert.ToInt32(paramThread);
+            string username = (string)Session["loginName"];
+
+            OleDbConnection connection = getDatabaseConnection();
+            string query = "INSERT INTO Messages (Sujet, Texte, Auteur, DateCreation) VALUES (\"" + indexSujet + "\", \"" + texte + "\", \"" + username + "\", DATE());";
+            OleDbCommand cmd = new OleDbCommand(query, connection);
+            cmd.ExecuteNonQuery();
+            Response.Write("<script>alert('Votre message a été posté.')</script>");
+            Response.Redirect("Default.aspx");
+        }
         private OleDbConnection getDatabaseConnection()
         {
             OleDbConnection oleDbConnection = new OleDbConnection();
