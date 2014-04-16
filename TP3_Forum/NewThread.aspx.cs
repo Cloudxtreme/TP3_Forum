@@ -38,6 +38,8 @@ namespace TP3_Forum
                 query = "INSERT INTO Messages (Sujet, Texte, Auteur, DateCreation) VALUES (" + index + ", \"" + txtMessage.InnerText + "\", \"" + (string)Session["loginName"] + "\", DATE());";
                 oleDbCommand = new OleDbCommand(query, oleDbConnection);
                 oleDbCommand.ExecuteNonQuery();
+
+                Response.Redirect("Default.aspx?thread="+index);
             }
             catch (Exception ex)
             {
