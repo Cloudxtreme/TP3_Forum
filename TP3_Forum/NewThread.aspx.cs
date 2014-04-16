@@ -11,7 +11,10 @@ namespace TP3_Forum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!(((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals("")))
+            {
+                newThreadVerify.InnerHtml = "<p>Vous devez être connecté pour créer un nouveau sujet!</p>";
+            }
         }
     }
 }
