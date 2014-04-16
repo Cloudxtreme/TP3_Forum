@@ -41,7 +41,7 @@ namespace TP3_Forum
 
                 Response.Redirect("Default.aspx?thread="+index);
             }
-            catch (Exception ex)
+            catch
             {
             }
             finally

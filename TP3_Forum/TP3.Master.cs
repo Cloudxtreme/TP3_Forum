@@ -39,7 +39,7 @@ namespace TP3_Forum
                     Response.Redirect("Default.aspx");
                 }
             }
-            catch (Exception ex)
+            catch
             {
             }
             finally
