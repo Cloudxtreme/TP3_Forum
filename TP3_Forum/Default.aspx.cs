@@ -31,6 +31,11 @@ namespace TP3_Forum
             {
                 test.Text = "<div class=\"jumbotron\"><div class=\"container\"><h1>Bienvenue Pirates!</h1><p>C'est le temps de se parler!</p></div></div>";
                 test.Text += loadIndex();
+
+                if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
+                {
+
+                }
             }
         }
 
