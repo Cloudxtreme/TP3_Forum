@@ -138,7 +138,7 @@ namespace TP3_Forum
             OleDbCommand cmd = new OleDbCommand(query, connection);
             cmd.ExecuteNonQuery();
             Response.Write("<script>alert('Votre message a été posté.')</script>");
-            Response.Redirect("Default.aspx");
+            Response.Redirect("Default.aspx?" + indexSujet);
         }
         private OleDbConnection getDatabaseConnection()
         {
