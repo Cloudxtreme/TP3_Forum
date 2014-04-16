@@ -200,32 +200,32 @@ namespace TP3_Forum
                 // Less than one minute ago.
                 if (secDiff < 60)
                 {
-                    return "just now";
+                    return "il y a quelques secondes";
                 }
                 // B.
                 // Less than 2 minutes ago.
                 if (secDiff < 120)
                 {
-                    return "1 minute ago";
+                    return "il y a 1 minute";
                 }
                 // C.
                 // Less than one hour ago.
                 if (secDiff < 3600)
                 {
-                    return string.Format("{0} minutes ago",
+                    return string.Format("il y a {0} minutes",
                         Math.Floor((double)secDiff / 60));
                 }
                 // D.
                 // Less than 2 hours ago.
                 if (secDiff < 7200)
                 {
-                    return "1 hour ago";
+                    return "il y a 1 heure";
                 }
                 // E.
                 // Less than one day ago.
                 if (secDiff < 86400)
                 {
-                    return string.Format("{0} hours ago",
+                    return string.Format("il y a {0} heures",
                         Math.Floor((double)secDiff / 3600));
                 }
             }
@@ -233,16 +233,16 @@ namespace TP3_Forum
             // Handle previous days.
             if (dayDiff == 1)
             {
-                return "yesterday";
+                return "hier";
             }
             if (dayDiff < 7)
             {
-                return string.Format("{0} days ago",
+                return string.Format("il y a {0} jours",
                 dayDiff);
             }
             if (dayDiff < 31)
             {
-                return string.Format("{0} weeks ago",
+                return string.Format("il y a {0} semaines",
                 Math.Ceiling((double)dayDiff / 7));
             }
             return null;
