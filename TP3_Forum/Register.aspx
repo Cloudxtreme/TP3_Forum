@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/TP3.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="TP3_Forum.Register" %>
+﻿<%@ Page Language="C#" Title="Inscriptions" MasterPageFile="~/TP3.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="TP3_Forum.Register" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContent" runat="server">
     <h2>Inscription</h2>
