@@ -63,7 +63,7 @@ namespace TP3_Forum
                     indexHtml += "<div class=\"row show-grid\">";
                     indexHtml += "<div class=\"col-md-4 col-left\"><h4><a href=\"?thread=" + monDataReader[3] +"\">" + monDataReader[0] + "</a></h4></div>";
                     indexHtml += "<div class=\"col-md-4 col-middle\"><h4>" + monDataReader[1] + "</h4></div>";
-                    indexHtml += "<div class=\"col-md-4 col-right\"><h4>" + monDataReader[2] + "</h4></div>";
+                    indexHtml += "<div class=\"col-md-4 col-right\"><h4>" + GetPrettyDate((DateTime)monDataReader[2]) + "</h4></div>";
                     indexHtml += "</div>";
                 }
 
@@ -99,7 +99,7 @@ namespace TP3_Forum
                 {
                     indexHtml += "<div class=\"row\">";
                     indexHtml += "<div class=\"col-md-2 threadCenter\">" + monDataReader[0] + "</div>";
-                    indexHtml += "<div class=\"col-md-10 threadCenter\">" + monDataReader[1] + "</div>";
+                    indexHtml += "<div class=\"col-md-10 threadCenter\">" + GetPrettyDate((DateTime)monDataReader[1]) + "</div>";
                     indexHtml += "<div class=\"col-md-2 hidden-xs hidden-sm avatar\"><img src=\"assets/img/" + monDataReader[2] + "\"/></div>";
                     indexHtml += "<div class=\"col-md-10\">" + monDataReader[3] + "</div>";
                     indexHtml += "</div>";
@@ -134,7 +134,7 @@ namespace TP3_Forum
             string username = (string)Session["loginName"];
 
             OleDbConnection connection = getDatabaseConnection();
-            string query = "INSERT INTO Messages (Sujet, Texte, Auteur, DateCreation) VALUES (\"" + indexSujet + "\", \"" + texte + "\", \"" + username + "\", DATE());";
+            string query = "INSERT INTO Messages (Sujet, Texte, Auteur, DateCreation) VALUES (\"" + indexSujet + "\", \"" + texte + "\", \"" + username + "\", #" + DateTime.Now + "#);";
             OleDbCommand cmd = new OleDbCommand(query, connection);
             cmd.ExecuteNonQuery();
             Response.Write("<script>alert('Votre message a été posté.')</script>");
@@ -168,6 +168,84 @@ namespace TP3_Forum
                     oleDbConnection.Close();
                 }
             }
+        }
+
+        //Source: http://www.dotnetperls.com/pretty-date
+        static string GetPrettyDate(DateTime d)
+        {
+            // 1.
+            // Get time span elapsed since the date.
+            TimeSpan s = DateTime.Now.Subtract(d);
+
+            // 2.
+            // Get total number of days elapsed.
+            int dayDiff = (int)s.TotalDays;
+
+            // 3.
+            // Get total number of seconds elapsed.
+            int secDiff = (int)s.TotalSeconds;
+
+            // 4.
+            // Don't allow out of range values.
+            if (dayDiff < 0 || dayDiff >= 31)
+            {
+                return null;
+            }
+
+            // 5.
+            // Handle same-day times.
+            if (dayDiff == 0)
+            {
+                // A.
+                // Less than one minute ago.
+                if (secDiff < 60)
+                {
+                    return "just now";
+                }
+                // B.
+                // Less than 2 minutes ago.
+                if (secDiff < 120)
+                {
+                    return "1 minute ago";
+                }
+                // C.
+                // Less than one hour ago.
+                if (secDiff < 3600)
+                {
+                    return string.Format("{0} minutes ago",
+                        Math.Floor((double)secDiff / 60));
+                }
+                // D.
+                // Less than 2 hours ago.
+                if (secDiff < 7200)
+                {
+                    return "1 hour ago";
+                }
+                // E.
+                // Less than one day ago.
+                if (secDiff < 86400)
+                {
+                    return string.Format("{0} hours ago",
+                        Math.Floor((double)secDiff / 3600));
+                }
+            }
+            // 6.
+            // Handle previous days.
+            if (dayDiff == 1)
+            {
+                return "yesterday";
+            }
+            if (dayDiff < 7)
+            {
+                return string.Format("{0} days ago",
+                dayDiff);
+            }
+            if (dayDiff < 31)
+            {
+                return string.Format("{0} weeks ago",
+                Math.Ceiling((double)dayDiff / 7));
+            }
+            return null;
         }
     }
 }
