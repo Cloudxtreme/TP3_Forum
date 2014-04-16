@@ -14,7 +14,14 @@ namespace TP3_Forum
         {
             if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
             {
-                rightBar.InnerHtml = "<a href=\"Default.aspx?disconnect=1\">" + (string)Session["loginName"] + " disconnect</a>";
+                rightBar.InnerHtml = "<a href=\"?disconnect=1\">" + (string)Session["loginName"] + " disconnect</a>";
+            }
+
+            string paramDisconnect = Request.QueryString["disconnect"];
+            if (paramDisconnect != null)
+            {
+                Session["loginName"] = "";
+                Response.Redirect("Default.aspx");
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)

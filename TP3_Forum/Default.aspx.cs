@@ -20,12 +20,7 @@ namespace TP3_Forum
                 post.InnerHtml = "";
             }
 
-            string paramDisconnect = Request.QueryString["disconnect"];
-            if (paramDisconnect != null)
-            {
-                Session["loginName"] = "";
-                Response.Redirect("Default.aspx");
-            }
+
 
             string paramThread = Request.QueryString["thread"];
             if (paramThread != null)
