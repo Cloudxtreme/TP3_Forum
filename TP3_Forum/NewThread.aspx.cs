@@ -28,6 +28,16 @@ namespace TP3_Forum
                 string query = "INSERT INTO Sujets ( Titre, Auteur, DateCreation) VALUES (\"" + txtTitle.Text + "\", \"" + (string)Session["loginName"] + "\", DATE());";
                 OleDbCommand oleDbCommand = new OleDbCommand(query, oleDbConnection);
                 oleDbCommand.ExecuteNonQuery();
+
+                query = "SELECT LAST(ID) FROM Sujets;";
+                oleDbCommand = new OleDbCommand(query, oleDbConnection);
+                OleDbDataReader monDataReader = oleDbCommand.ExecuteReader();
+                monDataReader.Read();
+                string index = monDataReader[0] + "";
+
+                query = "INSERT INTO Messages (Sujet, Texte, Auteur, DateCreation) VALUES (" + index + ", \"" + txtMessage.InnerText + "\", \"" + (string)Session["loginName"] + "\", DATE());";
+                oleDbCommand = new OleDbCommand(query, oleDbConnection);
+                oleDbCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
