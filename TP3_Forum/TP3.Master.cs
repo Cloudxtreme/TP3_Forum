@@ -14,7 +14,8 @@ namespace TP3_Forum
         {
             if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
             {
-                rightBar.InnerHtml = "<a href=\"?disconnect=1\">" + (string)Session["loginName"] + " disconnect</a>";
+                rightBar.InnerHtml = "<img src=\"assets/img/" + (string)Session["loginImg"] +"\" style=\"max-height: 40px; max-width: 40px;\">";
+                rightBar.InnerHtml += "<a href=\"?disconnect=1\">" + (string)Session["loginName"] + " disconnect</a>";
             }
 
             string paramDisconnect = Request.QueryString["disconnect"];
@@ -35,7 +36,7 @@ namespace TP3_Forum
             {
                 oleDbConnection = getDatabaseConnection();
 
-                string query = "SELECT MotDePasse, Pseudo FROM Utilisateurs WHERE Courriel = \"" + txtEmail.Text + "\";";
+                string query = "SELECT MotDePasse, Pseudo, Avatar FROM Utilisateurs WHERE Courriel = \"" + txtEmail.Text + "\";";
                 OleDbCommand oleDbCommand = new OleDbCommand(query, oleDbConnection);
                 OleDbDataReader monDataReader = oleDbCommand.ExecuteReader();
                 monDataReader.Read();
@@ -43,6 +44,7 @@ namespace TP3_Forum
                 if (result.Equals(txtPassword.Text))
                 {
                     Session["loginName"] = monDataReader[1] + "";
+                    Session["loginImg"] = monDataReader[2] + "";
                     Response.Redirect("Default.aspx");
                 }
             }
