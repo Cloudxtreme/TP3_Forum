@@ -17,7 +17,7 @@ namespace TP3_Forum
 
             if (!(((string)Session["loginName"]) != null && !(((string)Session["loginName"]).Equals(""))))
             {
-                txtMessage.Visible = false;
+                post.InnerHtml = "";
             }
 
             string paramDisconnect = Request.QueryString["disconnect"];
