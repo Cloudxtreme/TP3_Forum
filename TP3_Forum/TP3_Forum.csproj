@@ -57,12 +57,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actualités.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Register.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="NewThread.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actualités.aspx.cs">
+      <DependentUpon>Actualités.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actualités.aspx.designer.cs">
+      <DependentUpon>Actualités.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

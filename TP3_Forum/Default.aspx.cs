@@ -20,8 +20,6 @@ namespace TP3_Forum
                 post.InnerHtml = "";
             }
 
-
-
             string paramThread = Request.QueryString["thread"];
             if (paramThread != null)
             {

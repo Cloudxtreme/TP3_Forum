@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 namespace TP3_Forum
 {
@@ -12,6 +13,15 @@ namespace TP3_Forum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Admin"] != null)
+            {
+                HtmlGenericControl Home = new HtmlGenericControl("a");
+                Home.InnerText = "Administrateur";
+                Home.Attributes.Add("class", "navbar-brand");
+                Home.Attributes.Add("href", "/");
+                admin.Controls.Add(Home);
+            }
+
             if (((string)Session["loginName"]) != null && !((string)Session["loginName"]).Equals(""))
             {
                 rightBar.InnerHtml = "<img src=\"assets/img/" + (string)Session["loginImg"] +"\" style=\"max-height: 40px; max-width: 40px;\">";
@@ -45,6 +55,17 @@ namespace TP3_Forum
                 {
                     Session["loginName"] = monDataReader[1] + "";
                     Session["loginImg"] = monDataReader[2] + "";
+
+                    // Définition de si le user est un simple user, un admin, un modo, un plusieurs de ces choix.
+                    string query1 = "SELECT Utilisateur, Administrateur, Moderateur FROM Utilisateurs WHERE Courriel = \"" + txtEmail.Text + "\";";
+                    OleDbCommand oleDbCommand1 = new OleDbCommand(query1, oleDbConnection);
+                    OleDbDataReader monDataReader1 = oleDbCommand1.ExecuteReader();
+                    monDataReader1.Read();
+                    int adminOrdinal = monDataReader1.GetOrdinal("Administrateur");
+                    Session["Utilisateur"] = monDataReader1.GetBoolean(0);
+                    Session["Admin"] = monDataReader1.GetBoolean(adminOrdinal);
+                    Session["Modo"] = monDataReader1.GetBoolean(2);
+
                     Response.Redirect("Default.aspx");
                 }
             }
