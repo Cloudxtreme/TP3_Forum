@@ -13,7 +13,7 @@ namespace TP3_Forum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Admin"] != null)
+            if (Session["Admin"] != null && Session["Admin"].Equals(true))
             {
                 HtmlGenericControl Home = new HtmlGenericControl("a");
                 Home.InnerText = "Administrateur";
