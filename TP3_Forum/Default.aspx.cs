@@ -136,7 +136,7 @@ namespace TP3_Forum
         private OleDbConnection getDatabaseConnection()
         {
             OleDbConnection oleDbConnection = new OleDbConnection();
-            oleDbConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Server.MapPath(@"assets/database/Weak End.accdb");
+            oleDbConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Server.MapPath(@"App_Data/Weak End.accdb");
             oleDbConnection.Open();
             return oleDbConnection;
         }

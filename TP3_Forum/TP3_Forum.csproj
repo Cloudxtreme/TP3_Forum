@@ -58,8 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Actualités.aspx" />
+    <Content Include="Administration.aspx" />
+    <Content Include="App_Data\Weak End.accdb" />
+    <Content Include="assets\database\Weak End.accdb" />
     <Content Include="Default.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Weak End.accdb" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -72,6 +76,13 @@
     </Compile>
     <Compile Include="Actualités.aspx.designer.cs">
       <DependentUpon>Actualités.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration.aspx.cs">
+      <DependentUpon>Administration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration.aspx.designer.cs">
+      <DependentUpon>Administration.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -105,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TP3.Master" />
+    <Content Include="App_Data\Weak End.laccdb" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -114,7 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\css\" />
-    <Folder Include="assets\database\" />
     <Folder Include="assets\img\" />
     <Folder Include="assets\js\" />
   </ItemGroup>

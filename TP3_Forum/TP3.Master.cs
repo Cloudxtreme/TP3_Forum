@@ -16,7 +16,7 @@ namespace TP3_Forum
             HtmlGenericControl Home = new HtmlGenericControl("a");
             Home.InnerText = "Administrateur";
             Home.Attributes.Add("class", "navbar-brand");
-            Home.Attributes.Add("href", "/");
+            Home.Attributes.Add("href", "/Administration.aspx");
 
             if (Session["Admin"] != null && Session["Admin"].Equals(true) && !(Session["loginName"].Equals("")))
             {
